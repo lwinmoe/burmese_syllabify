@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-#Lwin Moe, October 2011
+#Lwin Moe, October 2016
 package syllabify_burmese;
 use strict;
 use Encode;       # for Unicode handling
