@@ -36,6 +36,9 @@ my $puncs = qq(\x{104A}|\x{104B});
 sub syllabify {
   local ($_) = shift;
   ################ normalization
+  s/($consonants)($burmeseTones)($killer)/$1$3$2\|/g;
+  ################
+
   s/($individuals)/$1\|/g;
   s/($numbers)/$1\|/g;
   s/($puncs)/$1\|/g;
@@ -44,13 +47,20 @@ sub syllabify {
   s/\|(($medial)+)/$1\|/g;
   s/\|($joinedVowels|$vowels)/$1\|/g;
   s/\|($killer)/$1\|/g;
+  s/\|($joinedVowels|$vowels)/$1\|/g; # added to handle killer + Vowel U issue in UTN #11
   s/\|($burmeseTones)/$1$2\|/g;
   s/\|($consonants)($killer)/$1$2\|/g;
-  s/\|($consonants)($burmeseTones)/$1$2\|/g;
+  s/\|($consonants)($killer)($burmeseTones)/$1$2$3\|/g;
   s/\|($killer)/$1\|/g;
+  s/\|($joinedVowels|$vowels)/$1\|/g; # added to handle killer + Vowel U issue in UTN #11
   s/\|($burmeseTones)/$1\|/g;
   s/\|($killer)/$1\|/g;
   s/\|($virama)/$1/g;
+
+  s/\|($consonants)($killer)/$1$2\|/g; # to handle special case such as ကျွန်ုပ်
+
+  s/\|+(($medial)+)($joinedVowels|$vowels)(($killer)*)($burmeseTones)/$1$3$4$6\|/g; 
+                                     # to handle a special case such as ယောက်ျား
   
   s/ *\|+ */\|/g;
 
