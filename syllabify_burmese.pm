@@ -11,7 +11,7 @@ use Exporter;
 
 ############### Usage example
 # use Encode;
-# use burmeseunicode;
+# use syllabify_burmese;
 #my $foo = "နေကောင်းလား။";		# the text we want to convert
 #$foo = Encode::decode_utf8($foo);		# from bytes to UTF8 encoding
 #$foo = syllabify($foo);			

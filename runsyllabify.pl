@@ -1,4 +1,7 @@
 #!/usr/bin/perl
+use FindBin;
+use lib $FindBin::Bin;
+
 use strict;
 use Encode;
 use syllabify_burmese;
@@ -15,9 +18,7 @@ while (<"$input_folder/*">) {
   my $foo = <IN>;
   close IN;
   $foo = Encode::decode_utf8($foo);     # from bytes to UTF8 encoding
-  $foo = syllabify($foo);             # convert to Unicode 5.1
-                                        # other possible conversion routines are:
-                                        # soas2uni5, uni4touni5, myazedi2uni5, metta2uni5
+  $foo = syllabify($foo);               # syllabify 
                                         # ava2uni5
   $foo = Encode::encode_utf8($foo);     # back to bytes
   open OUT, ">$output_folder/$fileName" or die;
