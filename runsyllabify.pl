@@ -19,7 +19,6 @@ while (<"$input_folder/*">) {
   close IN;
   $foo = Encode::decode_utf8($foo);     # from bytes to UTF8 encoding
   $foo = syllabify($foo);               # syllabify 
-                                        # ava2uni5
   $foo = Encode::encode_utf8($foo);     # back to bytes
   open OUT, ">$output_folder/$fileName" or die;
   print OUT $foo;
